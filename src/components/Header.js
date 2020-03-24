@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { siteInfo } from '../utilities';
 import styled from 'styled-components';
 import Icon from './Icon';
@@ -14,29 +15,43 @@ const ActionRow = styled.div`
   justify-content: flex-end;
 `;
 
-const Header = ({ className, setAddingNew }) => {
+const Header = ({ className }) => {
   const { logo, name } = siteInfo;
 
   return (
     <header className={className}>
-      <Logo src={logo} alt={name} />
+      <Link to="/">
+        <Logo src={logo} alt={name} />
+      </Link>
       <h1>{name}</h1>
       <ActionRow>
-        <Icon
-          icon="plus"
-          height="40"
-          width="40"
-          viewBoxHeight="20"
-          viewBoxWidth="20"
-          onClick={() => setAddingNew(true)}
-        />
-        <Icon
-          icon="preview"
-          height="40"
-          width="40"
-          viewBoxHeight="20"
-          viewBoxWidth="20"
-        />
+        <Link to="/add-new">
+          <Icon
+            icon="plus"
+            height="20"
+            width="20"
+            viewBoxHeight="24"
+            viewBoxWidth="24"
+          />
+        </Link>
+        <Link to="/search">
+          <Icon
+            icon="preview"
+            height="20"
+            width="20"
+            viewBoxHeight="22"
+            viewBoxWidth="22"
+          />
+        </Link>
+        <Link to="/recent">
+          <Icon
+            icon="recent"
+            height="37"
+            width="37"
+            viewBoxHeight="100"
+            viewBoxWidth="100"
+          />
+        </Link>
       </ActionRow>
     </header>
   );

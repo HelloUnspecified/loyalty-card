@@ -1,35 +1,26 @@
-import React, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import GlobalStyle from './styles/globalStyle';
-import baseTheme from './styles/baseTheme';
-import Header from './components/Header';
-import AddNew from './components/AddNew';
-import RecentCustomers from './components/RecentCustomers';
-
-const Page = styled.div`
-  text-align: center;
-  background-image: linear-gradient(
-    ${({ theme }) => theme.colors.primary},
-    ${({ theme }) => theme.colors.secondary}
-  );
-  min-height: 100vh;
-  min-width: 100vw;
-`;
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Layout from './views/layout/Layout';
+import AddNew from './views/pages/AddNew';
+import Home from './views/pages/Home';
+import Member from './views/pages/Member';
+import Recent from './views/pages/RecentCustomers';
+import Search from './views/pages/Search';
 
 function App() {
-  const [addingNew, setAddingNew] = useState(false);
-
   return (
-    <ThemeProvider theme={baseTheme}>
-      <>
-        <GlobalStyle />
-        <Page>
-          <Header setAddingNew={setAddingNew} />
-          {addingNew && <AddNew closeForm={() => setAddingNew(false)} />}
-          {!addingNew && <RecentCustomers />}
-        </Page>
-      </>
-    </ThemeProvider>
+    <Router>
+      <Layout>
+        <Switch>
+          <Route path="/add-new" component={AddNew}></Route>
+          <Route path="/recent" component={Recent}></Route>
+          <Route path="/search" component={Search}></Route>
+          <Route path="/member/:id" component={Member}></Route>
+
+          <Route path="/" component={Home}></Route>
+        </Switch>
+      </Layout>
+    </Router>
   );
 }
 
