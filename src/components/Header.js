@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteInfo } from '../utilities';
 import styled from 'styled-components';
-import Icon from './Icon';
+import { Icon } from './Icon';
 
 const Logo = styled.img`
   height: 7rem;

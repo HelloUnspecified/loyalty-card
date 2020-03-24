@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Icon from './Icon';
+import { Icon } from './Icon';
 
 const ModalMain = styled.div`
   position: fixed;
@@ -43,7 +43,7 @@ const CloseIcon = styled(Icon)`
   }
 `;
 
-const Modal = ({ className, children, onClose, showModal }) => {
+export const Modal = ({ className, children, onClose, showModal }) => {
   return (
     <ModalMain
       showModal={showModal}
@@ -77,42 +77,42 @@ Modal.defaultProps = {
   onClose: () => {},
 };
 
-export default styled(Modal)`
-  h2 {
-    font-size: 2.8rem;
-    margin-bottom: 0.7rem;
-  }
+// export default styled(Modal)`
+//   h2 {
+//     font-size: 2.8rem;
+//     margin-bottom: 0.7rem;
+//   }
 
-  h2,
-  h3,
-  p {
-    text-align: center;
-    line-height: 1.2;
-    color: ${({ theme }) => theme.colors.dark};
-  }
+//   h2,
+//   h3,
+//   p {
+//     text-align: center;
+//     line-height: 1.2;
+//     color: ${({ theme }) => theme.colors.dark};
+//   }
 
-  h2,
-  h3 {
-    font-weight: 400;
-  }
+//   h2,
+//   h3 {
+//     font-weight: 400;
+//   }
 
-  p {
-    max-width: 60rem;
-    margin: auto;
-  }
+//   p {
+//     max-width: 60rem;
+//     margin: auto;
+//   }
 
-  .underline {
-    padding-bottom: 2rem;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.orange};
-  }
+//   .underline {
+//     padding-bottom: 2rem;
+//     border-bottom: 1px solid ${({ theme }) => theme.colors.orange};
+//   }
 
-  .top-line {
-    padding-top: 1.5rem;
-    margin-top: 2rem;
-    border-top: 1px solid ${({ theme }) => theme.colors.orange};
-  }
+//   .top-line {
+//     padding-top: 1.5rem;
+//     margin-top: 2rem;
+//     border-top: 1px solid ${({ theme }) => theme.colors.orange};
+//   }
 
-  .mc-field-group {
-    justify-content: center;
-  }
-`;
+//   .mc-field-group {
+//     justify-content: center;
+//   }
+// `;

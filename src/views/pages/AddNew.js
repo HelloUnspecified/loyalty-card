@@ -1,21 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import Button from '../../components/Button';
-import TextInput from '../../components/TextInput';
+import { Button, TextInput } from '../../components';
+import { ContentBlock } from '../../utilities';
 
 const FormFields = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: calc(100vw - 3rem);
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 1rem;
-  padding: 1rem 2rem;
-  margin: 2rem auto;
+  ${ContentBlock}
 `;
 
 const ButtonRow = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-around;
   padding: 2rem 0;
 `;

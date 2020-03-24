@@ -23,7 +23,7 @@ const Svg = styled.svg`
   }
 `;
 
-const Icon = ({
+export const Icon = ({
   className,
   onClick,
   height,
@@ -54,5 +54,3 @@ const Icon = ({
     </Svg>
   );
 };
-
-export default Icon;
