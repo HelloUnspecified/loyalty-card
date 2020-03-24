@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '../react-auth0-spa';
 import { siteInfo } from '../utilities';
 import styled from 'styled-components';
 import Icon from './Icon';
@@ -16,6 +17,7 @@ const ActionRow = styled.div`
 `;
 
 const Header = ({ className }) => {
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const { logo, name } = siteInfo;
 
   return (
@@ -24,35 +26,43 @@ const Header = ({ className }) => {
         <Logo src={logo} alt={name} />
       </Link>
       <h1>{name}</h1>
-      <ActionRow>
-        <Link to="/add-new">
-          <Icon
-            icon="plus"
-            height="20"
-            width="20"
-            viewBoxHeight="24"
-            viewBoxWidth="24"
-          />
-        </Link>
-        <Link to="/search">
-          <Icon
-            icon="preview"
-            height="20"
-            width="20"
-            viewBoxHeight="22"
-            viewBoxWidth="22"
-          />
-        </Link>
-        <Link to="/recent">
-          <Icon
-            icon="recent"
-            height="37"
-            width="37"
-            viewBoxHeight="100"
-            viewBoxWidth="100"
-          />
-        </Link>
-      </ActionRow>
+
+      {!isAuthenticated && (
+        <button onClick={() => loginWithRedirect({})}>Log in</button>
+      )}
+
+      {isAuthenticated && (
+        <ActionRow>
+          <button onClick={() => logout()}>Log out</button>
+          <Link to="/add-new">
+            <Icon
+              icon="plus"
+              height="20"
+              width="20"
+              viewBoxHeight="24"
+              viewBoxWidth="24"
+            />
+          </Link>
+          <Link to="/search">
+            <Icon
+              icon="preview"
+              height="20"
+              width="20"
+              viewBoxHeight="22"
+              viewBoxWidth="22"
+            />
+          </Link>
+          <Link to="/recent">
+            <Icon
+              icon="recent"
+              height="37"
+              width="37"
+              viewBoxHeight="100"
+              viewBoxWidth="100"
+            />
+          </Link>
+        </ActionRow>
+      )}
     </header>
   );
 };
