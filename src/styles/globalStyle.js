@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'polished';
-import { below } from '../utilities/breakpoint';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize()};
@@ -40,15 +39,16 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-size: 5rem;
+    font-size: 4.5rem;
     margin-top: 0;
     margin-bottom: 0.5rem;
     color: ${({ theme }) => theme.colors.fonts.dark};
   }
 
   h2 {
-    font-size: 4rem;
-    color: ${({ theme }) => theme.colors.fonts.light};
+    font-size: 3.5rem;
+    color: ${({ theme }) => theme.colors.fonts.dark};
+    margin: 2rem 0;
   }
 
   h3 {
@@ -81,44 +81,40 @@ const GlobalStyle = createGlobalStyle`
   }
 
   form {
-    background-color: ${({ theme }) => theme.colors.white};
     margin: 0 2rem;
-    max-width: 80rem;
-    padding: 4rem;
     margin: auto;
-    border-radius: 1rem;
   }
 
-label {
-  position: absolute;
-  top: 0.5rem;
-  left: 0;
-  font-size: 3rem;
-  margin: 1rem;
-  padding: 0 1rem;
-  line-height: 1;
-  color: ${({ theme }) => theme.colors.gray};
-  background-color: ${({ theme }) => theme.colors.white};
-  -webkit-transition: top .2s ease-in-out, font-size .2s ease-in-out;
-  transition: top .2s ease-in-out, font-size .2s ease-in-out;
-}
+  label {
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    font-size: 3rem;
+    margin: 1rem;
+    padding: 0 1rem;
+    line-height: 1;
+    color: ${({ theme }) => theme.colors.gray};
+    background-color: ${({ theme }) => theme.colors.white};
+    -webkit-transition: top .2s ease-in-out, font-size .2s ease-in-out;
+    transition: top .2s ease-in-out, font-size .2s ease-in-out;
+  }
 
-.active {
-  top: -2rem;
-  font-size: 2rem;
-}
+  .active {
+    top: -2rem;
+    font-size: 2rem;
+  }
 
-input[type=text] {
-  width: 100%;
-  padding: 2rem;
-  border: 1px solid ${({ theme }) => theme.colors.gray};;
-  font-size: 2rem;
-  color: ${({ theme }) => theme.colors.gray};
-} 
+  input[type=text] {
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid ${({ theme }) => theme.colors.gray};;
+    font-size: 2rem;
+    color: ${({ theme }) => theme.colors.gray};
+  } 
 
-input[type=text]:focus {
-  outline: none;
-}
+  input[type=text]:focus {
+    outline: none;
+  }
 `;
 
 export default GlobalStyle;

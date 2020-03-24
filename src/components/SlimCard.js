@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
-import { siteInfo } from '../utilities';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import Icon from './Icon';
+import DotRow from './DotRow';
 
 const Name = styled.h3`
   margin: 0;
@@ -14,66 +15,68 @@ const Phone = styled.p`
   text-align: left;
 `;
 
-const dotStyle = css`
-  height: 4rem;
-  width: 4rem;
-  border-radius: 4rem;
-  margin: 0.75rem;
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
+const LastServed = styled.p`
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+  margin: 0;
+  padding: 0;
 `;
 
-const FilledDot = styled.div`
-  ${dotStyle}
-  background-color: ${({ theme }) => theme.colors.secondary};
-`;
-
-const OpenDot = styled.div`
-  ${dotStyle}
-`;
-const DotRow = styled.div`
+const CardRow = styled.div`
   display: flex;
-  flex-grow: 2;
-  justify-content: flex-end;
-  margin-right: 2rem;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-start;
 `;
 
-const SlimCard = ({ className, freeDrink, name, numberOfPunches, phone }) => {
-  const { punchesToFree } = siteInfo;
-
+const SlimCard = ({
+  className,
+  freeDrink,
+  id,
+  name,
+  numberOfPunches,
+  phone,
+}) => {
   return (
-    <div className={className}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <Name>{name}</Name>
-        <Phone>{phone}</Phone>
-      </div>
-      <DotRow>
-        {Array.from({ length: numberOfPunches }, (x, i) => (
-          <FilledDot />
-        ))}
-        {Array.from({ length: punchesToFree - numberOfPunches }, (x, i) => (
-          <OpenDot />
-        ))}
-      </DotRow>
+    <Link to={`/member/${id}`} className={className} key={name}>
+      <LastServed>6:41pm</LastServed>
       <Icon
         icon="drink"
         className={freeDrink ? 'filled' : ''}
-        height="90"
-        width="90"
-        viewBoxHeight="110"
-        viewBoxWidth="110"
+        height="70"
+        width="70"
+        viewBoxHeight="100"
+        viewBoxWidth="100"
       />
-    </div>
+      <CardRow>
+        <Name>{name}</Name>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          <Phone>{phone}</Phone>
+          <DotRow filledDots={numberOfPunches} />
+        </div>
+      </CardRow>
+    </Link>
   );
 };
 
 export default styled(SlimCard)`
   display: flex;
-  width: 80rem;
+  width: calc(100vw - 3rem);
+  flex-direction: row;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 1rem;
   padding: 1rem 2rem;
   margin: 1rem;
   align-items: center;
+  position: relative;
 
   svg {
     fill: ${({ theme }) => theme.colors.mediumGray};
