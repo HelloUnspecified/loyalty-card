@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "name": "MessageRooster-LoyaltyCard",
+  "env": {
+    "SENTRY_DSN": "TODO"
+  },
+  "build": {
+    "env": {
+      "SENTRY_DSN": "TODO"
+    }
+  },
+  "regions": ["cle"]
+}

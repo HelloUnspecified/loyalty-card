@@ -6,10 +6,10 @@ const RecentCustomers = ({ className }) => {
   return (
     <div className={className}>
       <h2>Recent Cards</h2>
-      <SlimCard name="Sara Gibbons" phone="586.746.7554" numberOfPunches="2" />
+      <SlimCard name="Sara Gibbons" phone="222-222-2222" numberOfPunches="2" />
       <SlimCard
         name="Clark Sell"
-        phone="847.921.7467"
+        phone="111-111-1111"
         numberOfPunches="4"
         freeDrink
       />
