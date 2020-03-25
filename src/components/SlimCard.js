@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Icon from './Icon';
-import DotRow from './DotRow';
+import { DotRow, Icon } from '../components';
+import { ContentBlock } from '../utilities';
 
 const Name = styled.h3`
   margin: 0;
@@ -68,15 +68,10 @@ const SlimCard = ({
 };
 
 export default styled(SlimCard)`
-  display: flex;
-  width: calc(100vw - 3rem);
+  ${ContentBlock}
   flex-direction: row;
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 1rem;
-  padding: 1rem 2rem;
-  margin: 1rem;
+  margin: 1rem auto;
   align-items: center;
-  position: relative;
 
   svg {
     fill: ${({ theme }) => theme.colors.mediumGray};

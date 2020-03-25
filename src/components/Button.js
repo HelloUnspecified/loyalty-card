@@ -11,8 +11,6 @@ const StyledButton = styled.button`
   font-weight: 700;
 `;
 
-const Button = ({ label, clickHandler }) => {
+export const Button = ({ label, clickHandler }) => {
   return <StyledButton onClick={clickHandler}>{label}</StyledButton>;
 };
-
-export default Button;

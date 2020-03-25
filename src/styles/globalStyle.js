@@ -107,7 +107,8 @@ const GlobalStyle = createGlobalStyle`
   input[type=text] {
     width: 100%;
     padding: 2rem;
-    border: 1px solid ${({ theme }) => theme.colors.gray};;
+    border: 1px solid ${({ theme }) => theme.colors.gray};
+    border-radius: 0.5rem;
     font-size: 2rem;
     color: ${({ theme }) => theme.colors.gray};
   } 

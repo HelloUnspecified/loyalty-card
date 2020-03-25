@@ -3,17 +3,13 @@ import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMachine } from '@xstate/react';
 import { useForm } from 'react-hook-form';
-
-import DotRow from '../../components/DotRow';
-import Icon from '../../components/Icon';
-import Button from '../../components/Button';
-import Modal from '../../components/Modal';
-import TextInput from '../../components/TextInput';
+import { Button, DotRow, Icon, Modal, TextInput } from '../../components';
 import {
   memberMachine,
   MEMBER_STATES,
   MEMBER_EVENTS,
 } from '../../machines/member';
+import { ContentBlock } from '../../utilities';
 
 const SAMPLE_MEMBER = {
   name: 'Beyonce Knowles',
@@ -84,6 +80,7 @@ const NumberFreeDrinks = styled.p`
 
 const ButtonRow = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-around;
   padding: 2rem 0;
 `;
@@ -241,11 +238,7 @@ const Member = ({ className }) => {
             <Button label="Save" clickHandler={save} />
           )}
           {state.matches(MEMBER_STATES.EDITING) && (
-            <Button
-              label="Cancel"
-              clickHandler={cancel}
-              style={{ marginLeft: '2rem' }}
-            />
+            <Button label="Cancel" clickHandler={cancel} />
           )}
         </ButtonRow>
       </div>
@@ -256,11 +249,7 @@ const Member = ({ className }) => {
           <p style={{ padding: '3rem 0 5rem 0' }}>{modalText}</p>
           <ButtonRow>
             <Button label={modalButtonText} clickHandler={save} />
-            <Button
-              label="Cancel"
-              clickHandler={cancel}
-              style={{ marginLeft: '2rem' }}
-            />
+            <Button label="Cancel" clickHandler={cancel} />
           </ButtonRow>
         </div>
       </Modal>
@@ -269,14 +258,8 @@ const Member = ({ className }) => {
 };
 
 export default styled(Member)`
-  display: flex;
-  width: calc(100vw - 3rem);
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 1rem;
-  padding: 1rem 2rem;
-  margin: 2rem auto;
+  ${ContentBlock}
   align-items: center;
-  flex-direction: column;
 
   svg {
     fill: ${({ theme }) => theme.colors.mediumGray};

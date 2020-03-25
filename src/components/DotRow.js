@@ -27,7 +27,7 @@ const OpenDot = styled.div`
   ${dotStyle}
 `;
 
-const DotRow = ({ align, className, filledDots, punch, size }) => {
+export const DotRow = ({ align, className, filledDots, punch, size }) => {
   const { punchesToFree } = siteInfo;
 
   return (
@@ -53,5 +53,3 @@ DotRow.defaultProps = {
   punch: () => {},
   size: '2.5rem',
 };
-
-export default styled(DotRow)``;
