@@ -46,7 +46,11 @@ const Search = ({ className }) => {
   // TODO: For actual implementation, needs to be wired into endpoint to search client's customers
   const handleSearch = searchText => {
     const searchResults = filter(sampleCustomers, customer => {
-      return customer.name.toLowerCase().includes(searchText);
+      return (
+        customer.name.toLowerCase().includes(searchText) ||
+        customer.email?.toLowerCase().includes(searchText) ||
+        customer.phone.includes(searchText)
+      );
     });
     setSearchResults(searchResults);
   };

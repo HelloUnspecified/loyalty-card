@@ -219,6 +219,7 @@ const Member = ({ className }) => {
             punch={punch}
             size="5rem"
             align="start"
+            id={id}
           />
           <div style={{ position: 'relative' }} onClick={redeem}>
             {freeDrinks > 0 && (

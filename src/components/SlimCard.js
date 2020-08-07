@@ -69,7 +69,7 @@ const SlimCard = ({
           }}
         >
           <Phone>{phone}</Phone>
-          <DotRow filledDots={numberOfPunches} />
+          <DotRow filledDots={numberOfPunches} id={id} />
         </div>
       </CardRow>
     </Link>

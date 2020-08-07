@@ -35,7 +35,6 @@ export const TextInput = ({
     <StyledTextInput className={className}>
       <input
         name={fieldId}
-        ref={register}
         value={value}
         onFocus={() => setHasFocus(true)}
         onBlur={() => setHasFocus(false)}
