@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import _ from 'lodash';
+import { filter, range } from 'lodash';
 import { useForm } from 'react-hook-form';
 import { useMachine } from '@xstate/react';
-import { ContentBlock } from '../../utilities';
+import { ContentBlock, sampleCustomers } from '../../utilities';
 import { TextInput } from '../../components';
-import {
-  searchMachine,
-  SEARCH_STATES,
-  SEARCH_EVENTS,
-} from '../../machines/search';
+import { searchMachine } from '../../machines/search';
+import SlimCard from '../../components/SlimCard';
 
 const SlimTextInput = styled(TextInput)`
   margin: 0.5rem;
@@ -20,9 +17,9 @@ const SlimTextInput = styled(TextInput)`
 `;
 
 const AlphaSearchBar = styled.div`
-  position: absolute;
+  position: fixed;
   right: 0;
-  bottom: 0;
+  top: 11.5rem;
   background-color: ${({ theme }) => theme.colors.primary};
   padding: 1rem 0;
   display: flex;
@@ -37,12 +34,26 @@ const Letter = styled.p`
   font-weight: 700;
   margin: 0;
   padding: 0 1rem;
+  line-height: 1;
 `;
 
 const Search = ({ className }) => {
   const { register, handleSubmit, watch, errors } = useForm();
+  const [searchResults, setSearchResults] = useState([]);
   const [state, send] = useMachine(searchMachine);
   const aCharCode = 'A'.charCodeAt(0);
+
+  // TODO: For actual implementation, needs to be wired into endpoint to search client's customers
+  const handleSearch = searchText => {
+    const searchResults = filter(sampleCustomers, customer => {
+      return (
+        customer.name.toLowerCase().includes(searchText) ||
+        customer.email?.toLowerCase().includes(searchText) ||
+        customer.phone.includes(searchText)
+      );
+    });
+    setSearchResults(searchResults);
+  };
 
   return (
     <>
@@ -53,11 +64,23 @@ const Search = ({ className }) => {
           register={register}
           errors={errors}
           placeholder="name, phone, email"
+          onChange={event => handleSearch(event.target.value)}
         />
       </div>
+      {searchResults.map(customer => (
+        <SlimCard
+          id={customer.id}
+          name={customer.name}
+          phone={customer.phone}
+          numberOfPunches={customer.numberOfPunches}
+          freeDrink={customer.freeDrinks > 0}
+        />
+      ))}
       <AlphaSearchBar>
-        {_.range(aCharCode, aCharCode + 26).map(num => (
-          <Letter>{String.fromCharCode(num)}</Letter>
+        {range(aCharCode, aCharCode + 26).map(num => (
+          <Letter key={String.fromCharCode(num)}>
+            {String.fromCharCode(num)}
+          </Letter>
         ))}
       </AlphaSearchBar>
     </>
@@ -66,6 +89,5 @@ const Search = ({ className }) => {
 
 export default styled(Search)`
   ${ContentBlock}
-  width: calc(100vw - 7rem);
-  margin: 2rem 5rem 0 2rem;
+  margin: 2rem 0;
 `;

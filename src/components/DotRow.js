@@ -27,16 +27,16 @@ const OpenDot = styled.div`
   ${dotStyle}
 `;
 
-export const DotRow = ({ align, className, filledDots, punch, size }) => {
+export const DotRow = ({ align, className, filledDots, id, punch, size }) => {
   const { punchesToFree } = siteInfo;
 
   return (
     <Row className={className} align={align}>
       {Array.from({ length: filledDots }, (x, i) => (
-        <FilledDot key={`${x}-${i}`} size={size} />
+        <FilledDot key={`filled-${id}-${x}-${i}`} size={size} />
       ))}
       {Array.from({ length: punchesToFree - filledDots }, (x, i) => (
-        <OpenDot key={`${x}-${i}`} onClick={punch} size={size} />
+        <OpenDot key={`open-${id}-${x}-${i}`} onClick={punch} size={size} />
       ))}
     </Row>
   );

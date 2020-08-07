@@ -5,6 +5,8 @@ const baseTheme = {
     tertiary: '#F74646',
     highlight: '#FF834D',
 
+    darkBlue: '#000099',
+
     gray: '#555555',
     darkGray: '#707070',
     mediumGray: '#d3d3d3',

@@ -1,24 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMachine } from '@xstate/react';
 import { useForm } from 'react-hook-form';
+import { find, isEmpty } from 'lodash';
 import { Button, DotRow, Icon, Modal, TextInput } from '../../components';
 import {
   memberMachine,
   MEMBER_STATES,
   MEMBER_EVENTS,
 } from '../../machines/member';
-import { ContentBlock } from '../../utilities';
-
-const SAMPLE_MEMBER = {
-  name: 'Beyonce Knowles',
-  email: 'queen@bey.com',
-  phone: '888.867.5309',
-  numberFreeDrinks: 2,
-  numberOfPunches: 3,
-  freeDrink: true,
-};
+import { ContentBlock, sampleCustomers } from '../../utilities';
 
 const BackArrow = styled(Icon)`
   fill: ${({ theme }) => theme.colors.darkGray};
@@ -64,6 +56,7 @@ const MoreDetails = styled.div`
   padding-top: 1rem;
   width: 100%;
   text-align: left;
+  font-size: 1.8rem;
 `;
 
 const NumberFreeDrinks = styled.p`
@@ -87,32 +80,47 @@ const ButtonRow = styled.div`
 
 const Member = ({ className }) => {
   const [state, send] = useMachine(memberMachine);
+  const [customer, setCustomer] = useState();
   const { register, handleSubmit, watch, errors } = useForm();
   const { id } = useParams();
   let history = useHistory();
 
+  useEffect(() => {
+    // TODO: For client implementation need to have this pull from client's customer base
+    //       And need to work this customer find/fetch better with the state machine
+    setCustomer(
+      find(sampleCustomers, customer => customer.id.toString() === id),
+    );
+  }, []);
+
+  if (isEmpty(customer)) {
+    return <div>Customer not found</div>;
+  }
+
   const {
-    name,
+    dateJoined,
     email,
-    phone,
-    numberFreeDrinks,
+    freeDrinks,
+    lifetimeFreeDrinks,
+    lifetimePunches,
+    name,
     numberOfPunches,
-    freeDrink,
-  } = SAMPLE_MEMBER;
+    phone,
+  } = customer;
 
   // need to figure out setting of state on loading stuffs
   send(MEMBER_EVENTS.FETCH);
   send(MEMBER_EVENTS.LOAD);
 
   const punch = () => {
-    // fire punch event
+    // TODO: fire punch event
     send(MEMBER_EVENTS.PUNCH);
     // after save of punch complete fire save event
     // send(MEMBER_EVENTS.SAVE);
   };
 
   const redeem = () => {
-    // fire redeem event
+    // TODO: fire redeem event
     send(MEMBER_EVENTS.REDEEM);
     // after save of redeem complete fire save event
     // send(MEMBER_EVENTS.SAVE);
@@ -123,6 +131,7 @@ const Member = ({ className }) => {
   };
 
   const save = () => {
+    // TODO: save changes to database
     send(MEMBER_EVENTS.SAVE);
   };
 
@@ -210,14 +219,15 @@ const Member = ({ className }) => {
             punch={punch}
             size="5rem"
             align="start"
+            id={id}
           />
           <div style={{ position: 'relative' }} onClick={redeem}>
-            {numberFreeDrinks && (
-              <NumberFreeDrinks>{numberFreeDrinks}</NumberFreeDrinks>
+            {freeDrinks > 0 && (
+              <NumberFreeDrinks>{freeDrinks}</NumberFreeDrinks>
             )}
             <Icon
               icon="drink"
-              className={freeDrink ? 'filled' : ''}
+              className={freeDrinks > 0 ? 'filled' : ''}
               height="110"
               width="110"
               viewBoxHeight="110"
@@ -226,9 +236,15 @@ const Member = ({ className }) => {
           </div>
         </div>
         <MoreDetails>
-          <p>Joined: 6/1/19</p>
-          <p>Lifetime Punches: 25</p>
-          <p>Lifetime Free Drinks: 3</p>
+          <p>
+            Joined: <strong>{dateJoined.toLocaleDateString()}</strong>
+          </p>
+          <p>
+            Lifetime Punches: <strong>{lifetimePunches}</strong>
+          </p>
+          <p>
+            Lifetime Free Drinks: <strong>{lifetimeFreeDrinks}</strong>
+          </p>
         </MoreDetails>
         <ButtonRow>
           {state.matches(MEMBER_STATES.DISPLAYING) && (

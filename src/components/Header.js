@@ -28,12 +28,13 @@ const Header = ({ className }) => {
       <h1>{name}</h1>
 
       {!isAuthenticated && (
-        <button onClick={() => loginWithRedirect({})}>Log in</button>
+        <div className="flex-grow right">
+          <button onClick={() => loginWithRedirect({})}>Log in</button>
+        </div>
       )}
 
       {isAuthenticated && (
         <ActionRow>
-          <button onClick={() => logout()}>Log out</button>
           <Link to="/add-new">
             <Icon
               icon="plus"
@@ -61,6 +62,7 @@ const Header = ({ className }) => {
               viewBoxWidth="100"
             />
           </Link>
+          <button onClick={() => logout()}>Log out</button>
         </ActionRow>
       )}
     </header>

@@ -2,9 +2,12 @@ import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'polished';
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
   ${normalize()};
+
   html {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     width: 100%;
     height: 100%;
 
@@ -115,6 +118,32 @@ const GlobalStyle = createGlobalStyle`
 
   input[type=text]:focus {
     outline: none;
+  }
+
+  button {
+    background-color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  //**** FLEX
+  .flex-grow {
+    flex-grow: 2;
+  }
+
+  .flex-end {
+    align-self: flex-end;
+  }
+
+  //**** ALIGN
+  .right {
+    text-align: right;
   }
 `;
 

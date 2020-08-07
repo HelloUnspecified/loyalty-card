@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
+/**
+ *  Thought was in here for...
+ *  demo app - make call to store user's data so that we can reach out later
+ *  real app - need to get authorization for client and user logged in
+ * */
+
 const DEFAULT_REDIRECT_CALLBACK = () =>
   window.history.replaceState({}, document.title, window.location.pathname);
 
