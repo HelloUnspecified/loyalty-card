@@ -18,13 +18,18 @@ export const TextInput = ({
   errors,
   fieldId,
   label,
+  onChange,
   placeholder,
   register,
+  registerOptions,
   required,
   value,
 }) => {
   const [hasFocus, setHasFocus] = useState(false);
-  const registerOptions = { ...(required && { required: true }) };
+  const fieldRegisterOptions = {
+    ...(required && { required: true }),
+    ...registerOptions,
+  };
 
   return (
     <StyledTextInput className={className}>
@@ -34,7 +39,8 @@ export const TextInput = ({
         value={value}
         onFocus={() => setHasFocus(true)}
         onBlur={() => setHasFocus(false)}
-        ref={register(registerOptions)}
+        onChange={onChange}
+        ref={register(fieldRegisterOptions)}
         type="text"
         className={required && 'required'}
         placeholder={placeholder}
@@ -44,7 +50,7 @@ export const TextInput = ({
           {label}
         </label>
       )}
-      {errors[fieldId] && <span>This field is required</span>}
+      {errors[fieldId] && <span role="alert">{errors[fieldId].message}</span>}
     </StyledTextInput>
   );
 };

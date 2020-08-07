@@ -39,9 +39,18 @@ const SlimCard = ({
   numberOfPunches,
   phone,
 }) => {
+  // TODO: get datetime last served from backend, this is to fake a datetime for demo
+  const sampleTime = () => {
+    let today = new Date();
+    today.setMinutes(
+      today.getMinutes() - Math.floor(Math.random() * Math.floor(60)),
+    );
+    return today.toLocaleString();
+  };
+
   return (
     <Link to={`/member/${id}`} className={className} key={name}>
-      <LastServed>6:41pm</LastServed>
+      <LastServed>{sampleTime()}</LastServed>
       <Icon
         icon="drink"
         className={freeDrink ? 'filled' : ''}
@@ -72,6 +81,7 @@ export default styled(SlimCard)`
   flex-direction: row;
   margin: 1rem auto;
   align-items: center;
+  width: 100%;
 
   svg {
     fill: ${({ theme }) => theme.colors.mediumGray};

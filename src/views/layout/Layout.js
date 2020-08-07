@@ -15,6 +15,13 @@ const Page = styled.div`
   min-width: 100vw;
 `;
 
+const Content = styled.div`
+  width: 90%;
+  max-width: 90rem;
+  margin: auto;
+  padding-bottom: 4rem;
+`;
+
 const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={baseTheme}>
@@ -22,7 +29,7 @@ const Layout = ({ children }) => {
         <GlobalStyle />
         <Page>
           <Header />
-          {children}
+          <Content>{children}</Content>
         </Page>
       </>
     </ThemeProvider>
